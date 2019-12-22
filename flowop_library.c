@@ -428,7 +428,7 @@ flowoplib_iobufsetup(threadflow_t *threadflow, flowop_t *flowop,
 
 	/* If directio, we need to align buffer address by sector */
 	if (flowoplib_fileattrs(flowop) & FLOW_ATTR_DIRECTIO)
-		iosize = iosize + 512;
+		iosize = iosize + 4096;
 
 	if ((memsize = threadflow->tf_constmemsize) != 0) {
 		/* use tf_mem for I/O with random offset */
@@ -466,7 +466,7 @@ flowoplib_iobufsetup(threadflow_t *threadflow, flowop_t *flowop,
 	}
 
 	if (flowoplib_fileattrs(flowop) & FLOW_ATTR_DIRECTIO)
-		*iobufp = (caddr_t)((((unsigned long)(*iobufp) + 512) / 512) * 512);
+		*iobufp = (caddr_t)((((unsigned long)(*iobufp) + 4096) / 4096) * 4096);
 
 	return (FILEBENCH_OK);
 }

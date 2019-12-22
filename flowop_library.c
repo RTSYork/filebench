@@ -2487,6 +2487,11 @@ flowoplib_appendfilerand(threadflow_t *threadflow, flowop_t *flowop)
 		return (FILEBENCH_OK);
 	}
 
+	// Round to 4k block if using direct I/O
+	if (avd_get_bool(flowop->fo_directio)) {
+		appendsize = ((appendsize + 4096) / 4096) * 4096;
+	}
+
 	if ((ret = flowoplib_iosetup(threadflow, flowop, &wss, &iobuf,
 	    &fdesc, appendsize)) != FILEBENCH_OK)
 		return (ret);

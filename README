@@ -1,6 +1,12 @@
 Filebench - A Model Based File System Workload Generator
 ========================================================
 
+*****************************************************************************
+
+This branch enables Direct I/O benchmarks on block devices with 4KiB sectors.
+
+*****************************************************************************
+
 
 INTRODUCTION
 ------------
